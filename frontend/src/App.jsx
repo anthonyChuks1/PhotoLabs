@@ -1,12 +1,20 @@
 import React from "react";
-
-import PhotoListItem from "./components/PhotoListItem";
-import PhotoFavButton from "components/PhotoFavButton";
 import "./App.scss";
 import PhotoList from "components/PhotoList";
+import TopicList from "components/TopicList";
 
 
+// const sampleDataForTopicListItem = {
+//   id: "1",
+//   slug: "topic-1",
+//   label: "Nature",
+// };
 
+// const topics = [
+//   sampleDataForTopicListItem,
+//   sampleDataForTopicListItem,
+//   sampleDataForTopicListItem,
+// ]
 // const photos = [
 //   sampleDataForPhotoListItem,
 //   sampleDataForPhotoListItem,
@@ -22,9 +30,16 @@ const App = () => {
           <PhotoListItem photo={photo}></PhotoListItem>
         </div>
       ))} */}
+    
+      {/* {topics.map((topic, index) => (
+        <TopicListItem key = {index} topic = {topic} />
+      ))} */}
+
+      <TopicList/>      
       <PhotoList/>
     </div>
   );
 };
 
 export default App;
+
