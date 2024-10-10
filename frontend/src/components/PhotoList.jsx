@@ -64,7 +64,7 @@ const sampleDataForPhotoList = [
     imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
     username: "Joe Example",
     profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-  }
+  },
 ];
 
 const PhotoList = () => {
@@ -72,9 +72,11 @@ const PhotoList = () => {
     <ul className="photo-list">
       {/* Insert React */}
       {sampleDataForPhotoList.map((photo) => (
-        <div key={photo.id} className="photo-list__fav-icon-svg">
-          <PhotoListItem photo={photo}></PhotoListItem>
-        </div>
+        <PhotoListItem
+          className="photo-list__fav-icon-svg"
+          key={photo.id}
+          photo={photo}
+        ></PhotoListItem>
       ))}
     </ul>
   );
