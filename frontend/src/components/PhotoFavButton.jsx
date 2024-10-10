@@ -7,13 +7,14 @@ import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton() {
   const [selected, setSelected] = useState(false);
+  
   const handleClick = () => {
-    setSelected(!selected)
+    setSelected(!selected)    
   }
   return (
     <div className="photo-list__fav-icon" onClick = {handleClick}>
       <div className="photo-list__fav-icon-svg" >
-       <FavIcon selected = {selected}/>    
+       <FavIcon selected = {selected} />    
       </div>
     </div>
   );

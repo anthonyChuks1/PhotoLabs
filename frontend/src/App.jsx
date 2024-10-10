@@ -27,7 +27,6 @@ const App = () => {
     <div className="App">
       {photos.map((photo, index) => (
         <div key={index} className="photo-list__fav-icon-svg">
-          <PhotoFavButton />
           <PhotoListItem photo={photo}></PhotoListItem>
         </div>
       ))}
