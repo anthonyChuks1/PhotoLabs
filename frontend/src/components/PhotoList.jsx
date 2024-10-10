@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../styles/PhotoList.scss";
+import PhotoListItem from "./PhotoListItem";
 
 const sampleDataForPhotoList = [
   {
@@ -54,12 +55,27 @@ const sampleDataForPhotoList = [
       profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
     },
   },
+  {
+    id: "4",
+    location: {
+      city: "Montreal",
+      country: "Canada",
+    },
+    imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
+    username: "Joe Example",
+    profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
+  }
 ];
 
 const PhotoList = () => {
   return (
     <ul className="photo-list">
       {/* Insert React */}
+      {sampleDataForPhotoList.map((photo) => (
+        <div key={photo.id} className="photo-list__fav-icon-svg">
+          <PhotoListItem photo={photo}></PhotoListItem>
+        </div>
+      ))}
     </ul>
   );
 };
