@@ -18,10 +18,11 @@ const App = () => {
   return (
     <div className="App">
       <PhotoListItem
-        imageSource={sampleDataForPhotoListItem.imageSource}
-        username={sampleDataForPhotoListItem.username}
-        profile = {sampleDataForPhotoListItem.profile}
-        location = {`${sampleDataForPhotoListItem.location.city}, ${sampleDataForPhotoListItem.location.country}`}
+        // imageSource={sampleDataForPhotoListItem.imageSource}
+        // username={sampleDataForPhotoListItem.username}
+        // profile = {sampleDataForPhotoListItem.profile}
+        // location = {`${sampleDataForPhotoListItem.location.city}, ${sampleDataForPhotoListItem.location.country}`}
+        photo = {sampleDataForPhotoListItem}
       />
     </div>
   );
