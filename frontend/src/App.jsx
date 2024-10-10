@@ -1,6 +1,7 @@
 import React from "react";
 
 import PhotoListItem from "./components/PhotoListItem";
+import PhotoFavButton from "components/PhotoFavButton";
 import "./App.scss";
 
 const sampleDataForPhotoListItem = {
@@ -25,7 +26,10 @@ const App = () => {
   return (
     <div className="App">
       {photos.map((photo, index) => (
-        <PhotoListItem key={index} photo={photo} />
+        <div key={index} className="photo-list__fav-icon-svg">
+          <PhotoFavButton />
+          <PhotoListItem photo={photo}></PhotoListItem>
+        </div>
       ))}
     </div>
   );
