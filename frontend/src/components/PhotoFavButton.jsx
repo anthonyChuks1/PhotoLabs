@@ -11,7 +11,7 @@ function PhotoFavButton({photo, handleFavList}) {
   const handleClick = () => {
     const newSelected = !selected;
     setSelected(newSelected);
-    handleFavList(photo, newSelected);
+    handleFavList(newSelected, photo);
   }
   return (
     <div className="photo-list__fav-icon" onClick = {handleClick}>
