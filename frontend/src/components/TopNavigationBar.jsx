@@ -8,8 +8,8 @@ const TopNavigation = () => {
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
-      <span><TopicList/></span>
-      <span><FavBadge/></span>
+      <TopicList/>
+      <FavBadge/>
     </div>
   )
 }

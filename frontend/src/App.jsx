@@ -3,6 +3,7 @@ import "./App.scss";
 import PhotoList from "components/PhotoList";
 import TopicList from "components/TopicList";
 import TopNavigation from "components/TopNavigationBar";
+import HomeRoute from "routes/HomeRoute";
 
 
 // const sampleDataForTopicListItem = {
@@ -35,8 +36,9 @@ const App = () => {
       {/* {topics.map((topic, index) => (
         <TopicListItem key = {index} topic = {topic} />
       ))} */}
-      <TopNavigation/>      
-      <PhotoList/>
+      {/* <TopNavigation/>      
+      <PhotoList/> */}
+      <HomeRoute/>
     </div>
   );
 };
