@@ -5,20 +5,19 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = ({ photo, handleFavList }) => {
   /* Insert React */
   const {
-    imageSource,
-    profile,
-    username,
+    urls: { full, regular },
+    user: {id, profile,username, name },
     location: { city, country },
   } = photo;
   return (
     <div className="photo-list__item">
       <PhotoFavButton photo={photo} handleFavList={handleFavList} />
-      <img src={imageSource} className="photo-list__image" />
+      <img src={regular} className="photo-list__image" />
 
       <div className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <p>{username}</p>
+          <p>{name}</p>
           <p className="photo-list__user-location">
             {city}, {country}
           </p>
