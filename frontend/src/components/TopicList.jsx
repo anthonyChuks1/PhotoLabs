@@ -26,7 +26,7 @@ const TopicList = () => {
     <div className="top-nav-bar__topic-list">
       {/* Insert React components here */}
       {sampleDataForTopicList.map((topic) => (
-        <TopicListItem key={topic.id} topic={topic} />
+        <TopicListItem key={topic.id} title={topic.title} />
       ))}
     </div>
   );
