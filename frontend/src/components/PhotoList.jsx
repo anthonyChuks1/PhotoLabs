@@ -5,7 +5,7 @@ import PhotoListItem from "./PhotoListItem";
 
 
 
-const PhotoList = ({photos}) => {
+const PhotoList = ({photos, handleFavList}) => {
   return (
     <ul className="photo-list">
       {/* Insert React */}
@@ -14,6 +14,7 @@ const PhotoList = ({photos}) => {
           className="photo-list__fav-icon-svg"
           key={photo.id}
           photo={photo}
+          handleFavList={handleFavList}
         ></PhotoListItem>
       ))}
     </ul>
