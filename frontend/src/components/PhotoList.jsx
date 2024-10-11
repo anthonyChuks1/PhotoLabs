@@ -6,11 +6,10 @@ import PhotoListItem from "./PhotoListItem";
 
 
 const PhotoList = ({photos}) => {
-const photoList = [...photos]
   return (
     <ul className="photo-list">
       {/* Insert React */}
-      {photoList.map((photo) => (
+      {photos.map((photo) => (
         <PhotoListItem
           className="photo-list__fav-icon-svg"
           key={photo.id}

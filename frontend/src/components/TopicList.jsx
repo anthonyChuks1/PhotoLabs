@@ -5,11 +5,10 @@ import TopicListItem from "./TopicListItem";
 
 
 const TopicList = ({topics}) => {
-  const topicList = [...topics];
   return (
     <div className="top-nav-bar__topic-list">
       {/* Insert React components here */}
-      {topicList.map((topic) => (
+      {topics.map((topic) => (
         <TopicListItem key={topic.id} id={topic.id} title={topic.title} />
       ))}
     </div>
