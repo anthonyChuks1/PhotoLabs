@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({ photo, key, handleFavList }) => {
+const PhotoListItem = ({ photo, handleFavList }) => {
   /* Insert React */
   const {
     imageSource,
@@ -12,7 +12,7 @@ const PhotoListItem = ({ photo, key, handleFavList }) => {
   } = photo;
   return (
     <div className="photo-list__item">
-      <PhotoFavButton key={key} photo={photo} handleFavList={handleFavList} />
+      <PhotoFavButton photo={photo} handleFavList={handleFavList} />
       <img src={imageSource} className="photo-list__image" />
 
       <div className="photo-list__user-details">
