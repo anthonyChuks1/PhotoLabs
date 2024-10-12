@@ -4,6 +4,7 @@ import HomeRoute from "routes/HomeRoute";
 import "./styles/PhotoDetailsModal.scss"
 import photos from "mocks/photos";
 import topics from "mocks/topics";
+import closeSymbol from "./assets/closeSymbol.svg";
 // Note: Rendering a single component to build components in isolation
 
 
@@ -40,17 +41,23 @@ const App = () => {
   const handleModal = () => {
     const isModalOpenNew = !isModalOpen;
     setIsModalOpen(isModalOpenNew);
-    console.log("Image clicked");
+    isModalOpenNew && console.log("Image clicked");
   }
   return (
     <div className="App">
+
       <HomeRoute
         topics={topics}
         photos={photos}
         handleFavList={handleFavList}
         isFavPhotoExist={handleFavListFlag()}
         handleModal = {handleModal}      
-      > {isModalOpen && <alert> Meant to contain an image</alert>}</HomeRoute>
+      > </HomeRoute>
+      {isModalOpen && (
+        <div className="photo-details-modal">
+          <img className = "photo-details-modal__close-button" src={closeSymbol} alt="Close" onClick={handleModal}/>
+        </div>
+      )}
     </div>
   );
 };
