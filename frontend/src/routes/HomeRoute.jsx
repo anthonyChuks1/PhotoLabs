@@ -10,7 +10,6 @@ const HomeRoute = ({
   handleFavList,
   isFavPhotoExist,
   handleModal,
-  isModalOpen,
 }) => {
   return (
     <div className="home-route">

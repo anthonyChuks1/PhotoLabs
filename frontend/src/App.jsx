@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
-import "./styles/PhotoDetailsModal.scss"
+import "./styles/PhotoDetailsModal.scss";
 import photos from "mocks/photos";
 import topics from "mocks/topics";
-import closeSymbol from "./assets/closeSymbol.svg";
+import PhotoDetailsModal from "routes/PhotoDetailsModal";
 // Note: Rendering a single component to build components in isolation
-
 
 const App = () => {
   //The array that holds the id for the favorite photographs
   const [favPhotos, setFavPhotos] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   //const [favFlag, setFavFlag] = useState(false);
-  //handles the array that keeps track of the favorite photo 
+  //handles the array that keeps track of the favorite photo
   const handleFavList = (selected, photo) => {
     if (selected) {
       setFavPhotos((prevFavPhotos) => {
@@ -33,31 +33,28 @@ const App = () => {
     }
   };
 
-  //handles the favbadge icon on the nav bar 
+  //handles the favbadge icon on the nav bar
   const handleFavListFlag = () => {
     return favPhotos.length ? true : false;
   };
-  
+
   const handleModal = () => {
     const isModalOpenNew = !isModalOpen;
     setIsModalOpen(isModalOpenNew);
     isModalOpenNew && console.log("Image clicked");
-  }
+  };
   return (
     <div className="App">
-
       <HomeRoute
         topics={topics}
         photos={photos}
         handleFavList={handleFavList}
         isFavPhotoExist={handleFavListFlag()}
-        handleModal = {handleModal}      
-      > </HomeRoute>
-      {isModalOpen && (
-        <div className="photo-details-modal">
-          <img className = "photo-details-modal__close-button" src={closeSymbol} alt="Close" onClick={handleModal}/>
-        </div>
-      )}
+        handleModal={handleModal}
+      >
+        {" "}
+      </HomeRoute>
+      {isModalOpen && <PhotoDetailsModal handleModal = {handleModal}/>}
     </div>
   );
 };
