@@ -3,6 +3,7 @@ import React from "react";
 import "../styles/PhotoDetailsModal.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 import PhotoFavButton from "components/PhotoFavButton";
+import PhotoList from "components/PhotoList";
 
 const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
   const {
@@ -40,16 +41,10 @@ const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
           <div></div>
         </div>
         <p className="photo-details-modal__header ">Similar Photos</p>
-        <div >
-          {console.log("In Photo details modal", similar_photos_array)}
-          {similar_photos_array.map((photo) => (
-            <div key={photo.id} className="photo-details-modal__images">
-              <PhotoFavButton />
-              <img 
-                src={photo.urls.regular}
-              />
-            </div>
-          ))}
+        <div>
+          <div className="photo-details-modal__images">
+            <PhotoList photos={similar_photos_array} favourites={favPhotos} />
+          </div>
         </div>
       </div>
     </div>
