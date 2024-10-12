@@ -15,6 +15,7 @@ const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
 
   const similar_photos_array = Object.values(similar_photos).flat();
 
+  
   return (
     <div className="photo-details-modal">
       <button
@@ -24,7 +25,8 @@ const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
         <img src={closeSymbol} alt="close symbol" />
       </button>
       <div>
-        <PhotoFavButton />
+      <PhotoFavButton photoId={id} favourites={favPhotos} />
+
         <img className="photo-details-modal__image" src={regular} />
         <div className="photo-details-modal__photographer-details">
           <img

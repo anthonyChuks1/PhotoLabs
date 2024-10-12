@@ -12,7 +12,6 @@ const App = () => {
   const [favPhotos, setFavPhotos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalDetail, setModalDetail] = useState();
-
   //const [favFlag, setFavFlag] = useState(false);
   //handles the array that keeps track of the favorite photo
   const handleFavList = (selected, photo) => {
@@ -42,9 +41,6 @@ const App = () => {
   const handleModal = (photo) => {
     const isModalOpenNew = !isModalOpen;
     setIsModalOpen(isModalOpenNew);
-    //isModalOpenNew && console.log("Image clicked");
-    const {urls:full} = photo;
-    console.log("In App: ",photo.similar_photos);
     setModalDetail(photo)
   };
 
@@ -60,7 +56,7 @@ const App = () => {
 
       >
       </HomeRoute>
-      {isModalOpen && <PhotoDetailsModal handleModal = {handleModal} photo = {modalDetail} favPhotos = {favPhotos}/>}
+      {isModalOpen && <PhotoDetailsModal  handleModal = {handleModal} photo = {modalDetail} favPhotos = {favPhotos}/>}
     </div>
   );
 };
