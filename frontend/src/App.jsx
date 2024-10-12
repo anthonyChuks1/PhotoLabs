@@ -11,7 +11,7 @@ const App = () => {
   //The array that holds the id for the favorite photographs
   const [favPhotos, setFavPhotos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalDetail, setModalDetail] = useState('Photo Is not available');
+  const [modalDetail, setModalDetail] = useState();
 
   //const [favFlag, setFavFlag] = useState(false);
   //handles the array that keeps track of the favorite photo
@@ -20,7 +20,7 @@ const App = () => {
       setFavPhotos((prevFavPhotos) => {
         const updatedFavPhotos = [...prevFavPhotos, photo.id];
 
-        console.log("fav photo list:", updatedFavPhotos);
+       // console.log("fav photo list:", updatedFavPhotos);
         return updatedFavPhotos;
       });
     } else {
@@ -28,7 +28,7 @@ const App = () => {
         const updatedFavPhotos = prevFavPhotos.filter(
           (valId) => valId !== photo.id
         );
-        console.log("fav photo list:", updatedFavPhotos);
+        //console.log("fav photo list:", updatedFavPhotos);
         return updatedFavPhotos;
       });
     }
@@ -44,8 +44,8 @@ const App = () => {
     setIsModalOpen(isModalOpenNew);
     //isModalOpenNew && console.log("Image clicked");
     const {urls:full} = photo;
-    console.log(full);
-    setModalDetail(full)
+    console.log("In App: ",photo.similar_photos);
+    setModalDetail(photo)
   };
 
   
@@ -60,7 +60,7 @@ const App = () => {
 
       >
       </HomeRoute>
-      {isModalOpen && <PhotoDetailsModal handleModal = {handleModal} modalDetail = {modalDetail}/>}
+      {isModalOpen && <PhotoDetailsModal handleModal = {handleModal} photo = {modalDetail} favPhotos = {favPhotos}/>}
     </div>
   );
 };
