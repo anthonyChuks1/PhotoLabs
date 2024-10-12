@@ -11,7 +11,7 @@ const PhotoListItem = ({ photo, handleFavList, handleModal}) => {
   } = photo;
 
   const handleImageClick = () => {
-    handleModal()
+    handleModal(photo)
   }
   return (
     <div className="photo-list__item">

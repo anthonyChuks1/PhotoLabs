@@ -10,6 +10,7 @@ const HomeRoute = ({
   handleFavList,
   isFavPhotoExist,
   handleModal,
+  handleModalDetail,
 }) => {
   return (
     <div className="home-route">
@@ -19,6 +20,7 @@ const HomeRoute = ({
         photos={photos}
         handleFavList={handleFavList}
         handleModal={handleModal}
+        
       />
     </div>
   );
