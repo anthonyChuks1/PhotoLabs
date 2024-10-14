@@ -5,7 +5,7 @@ import closeSymbol from "../assets/closeSymbol.svg";
 import PhotoFavButton from "components/PhotoFavButton";
 import PhotoList from "components/PhotoList";
 
-const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
+const PhotoDetailsModal = ({ handleModal, photo, favPhotos, handleFavList}) => {
   const {
     urls: { full, regular } = {},
     user: { id, profile, username, name } = {},
@@ -15,6 +15,7 @@ const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
 
   const similar_photos_array = Object.values(similar_photos).flat();
 
+ 
   
   return (
     <div className="photo-details-modal">
@@ -25,9 +26,9 @@ const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
         <img src={closeSymbol} alt="close symbol" />
       </button>
       <div>
-      <PhotoFavButton photoId={id} favourites={favPhotos} />
+      <PhotoFavButton photoId={id} photo = {photo} favPhotos={favPhotos} handleFavList={handleFavList}/>
 
-        <img className="photo-details-modal__image" src={regular} />
+        <img className="photo-details-modal__image" src={full} />
         <div className="photo-details-modal__photographer-details">
           <img
             src={profile}
@@ -45,7 +46,7 @@ const PhotoDetailsModal = ({ handleModal, photo, favPhotos }) => {
         <p className="photo-details-modal__header ">Similar Photos</p>
         <div>
           <div className="photo-details-modal__images">
-            <PhotoList photos={similar_photos_array} favourites={favPhotos} />
+            <PhotoList photos={similar_photos_array} favourites={favPhotos} handleFavList={handleFavList}/>
           </div>
         </div>
       </div>

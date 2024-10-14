@@ -14,37 +14,36 @@ const App = () => {
   const [modalDetail, setModalDetail] = useState();
   //const [favFlag, setFavFlag] = useState(false);
   //handles the array that keeps track of the favorite photo
-  const handleFavList = (selected, photo) => {
-    if (selected) {
-      setFavPhotos((prevFavPhotos) => {
-        const updatedFavPhotos = [...prevFavPhotos, photo.id];
+  // const handleFavList = (selected, photo) => {
+  //   if (selected) {
+  //     setFavPhotos((prevFavPhotos) => {
+  //       const updatedFavPhotos = [...prevFavPhotos, photo.id];
 
-       // console.log("fav photo list:", updatedFavPhotos);
-        return updatedFavPhotos;
-      });
-    } else {
-      setFavPhotos((prevFavPhotos) => {
-        const updatedFavPhotos = prevFavPhotos.filter(
-          (valId) => valId !== photo.id
-        );
-        //console.log("fav photo list:", updatedFavPhotos);
-        return updatedFavPhotos;
-      });
-    }
-  };
+  //       // console.log("fav photo list:", updatedFavPhotos);
+  //       return updatedFavPhotos;
+  //     });
+  //   } else {
+  //     setFavPhotos((prevFavPhotos) => {
+  //       const updatedFavPhotos = prevFavPhotos.filter(
+  //         (valId) => valId !== photo.id
+  //       );
+  //       //console.log("fav photo list:", updatedFavPhotos);
+  //       return updatedFavPhotos;
+  //     });
+  //   }
+  // };
 
-  //handles the favbadge icon on the nav bar
-  const handleFavListFlag = () => {
-    return favPhotos.length ? true : false;
-  };
+  // //handles the favbadge icon on the nav bar
+  // const handleFavListFlag = () => {
+  //   return favPhotos.length ? true : false;
+  // };
 
-  const handleModal = (photo) => {
-    const isModalOpenNew = !isModalOpen;
-    setIsModalOpen(isModalOpenNew);
-    setModalDetail(photo)
-  };
+  // const handleModal = (photo) => {
+  //   const isModalOpenNew = !isModalOpen;
+  //   setIsModalOpen(isModalOpenNew);
+  //   setModalDetail(photo);
+  // };
 
-  
   return (
     <div className="App">
       <HomeRoute
@@ -53,10 +52,15 @@ const App = () => {
         handleFavList={handleFavList}
         isFavPhotoExist={handleFavListFlag()}
         handleModal={handleModal}
-
-      >
-      </HomeRoute>
-      {isModalOpen && <PhotoDetailsModal  handleModal = {handleModal} photo = {modalDetail} favPhotos = {favPhotos}/>}
+      ></HomeRoute>
+      {isModalOpen && (
+        <PhotoDetailsModal
+          handleModal={handleModal}
+          photo={modalDetail}
+          favPhotos={favPhotos}
+          handleFavList={handleFavList}
+        />
+      )}
     </div>
   );
 };
