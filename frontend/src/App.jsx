@@ -10,9 +10,9 @@ import useApplicationData from "./hooks/useApplicationData";
 
 const App = () => {
   //The array that holds the id for the favorite photographs
-  const { state, handleFavList, handleFavListFlag, handleModal } =
+  const { state: {isModalOpen, modalDetail, favPhotos}, handleFavList, handleFavListFlag, handleModal } =
     useApplicationData();
-
+  
   return (
     <div className="App">
       <HomeRoute
