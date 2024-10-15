@@ -1,27 +1,38 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
 export const ACTIONS = {
   ADD_FAV_PHOTO: "ADD_FAV_PHOTO",
+  REMOVE_FAV_PHOTO: "REMOVE_FAV_PHOTO",
   OPEN_MODAL_DIV: "OPEN_MODAL_DIV",
-  IS_FAV_LIST: "IS_FAV_LIST"
+  IS_FAV_LIST: "IS_FAV_LIST",
 };
-
 
 function reducer(state, action) {
   switch (action.type) {
-    case FAV_PHOTO_ADDED:
+    case ACTIONS.ADD_FAV_PHOTO:
       return {
+        ...state,
+        favPhotos: [...state.favPhotos, action.value.photo.id],
+      };
+    case ACTIONS.REMOVE_FAV_PHOTO:
+      return {
+        ...state,
+        favPhotos: state.favPhotos.filter(
+          (valId) => valId !== action.value.photo.id
+        ),
+      };
+    case ACTIONS.OPEN_MODAL_DIV:
+      return {
+        ...state,
+        isModalOpen: !state.isModalOpen,
+        modalDetail: action.value.photo,
+      };
+    case ACTIONS.IS_FAV_LIST:
+      return {
+        ...state,
+        isFavList: state.favPhotos.length > 0,
+      };
 
-       }
-    case OPEN_MODAL_DIV: 
-    return{
-
-    }
-    case IS_FAV_LIST: return{
-
-    }
-
-    
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -30,38 +41,39 @@ function reducer(state, action) {
 }
 
 const useApplicationData = () => {
-  const [favPhotos, setFavPhotos] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalDetail, setModalDetail] = useState();
-  const [state, dispatch] = useReducer(reducer, 0);
+  // const [favPhotos, setFavPhotos] = useState([]);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [modalDetail, setModalDetail] = useState();
+  const initialState = {
+    favPhotos: [],
+    isModalOpen: false,
+    modalDetail: null,
+    isFavList: false,
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const handleFavList = (selected, photo) => {
     if (selected) {
-      setFavPhotos((prevFavPhotos) => {
-        const updatedFavPhotos = [...prevFavPhotos, photo.id];
-        return updatedFavPhotos;
-      });
+      dispatch({ type: "ADD_FAV_PHOTO", value: { photo } });
     } else {
-      setFavPhotos((prevFavPhotos) => {
-        const updatedFavPhotos = prevFavPhotos.filter(
-          (valId) => valId !== photo.id
-        );
-        return updatedFavPhotos;
-      });
+      dispatch({ type: "REMOVE_FAV_PHOTO", value: { photo } });
     }
   };
 
   //handles the favbadge icon on the nav bar
   const handleFavListFlag = () => {
-    return favPhotos.length ? true : false;
+    return state.favPhotos.length ? true : false;
   };
 
   const handleModal = (photo) => {
-    const isModalOpenNew = !isModalOpen;
-    setIsModalOpen(isModalOpenNew);
-    setModalDetail(photo);
+    dispatch({ type: "OPEN_MODAL_DIV", value: { photo } });
   };
   return {
-    state: { favPhotos, isModalOpen, modalDetail },
+    state: { 
+      favPhotos: state.favPhotos, 
+      isModalOpen: state.isModalOpen, 
+      modalDetail: state.modalDetail 
+    },
     handleFavList,
     handleFavListFlag,
     handleModal,
