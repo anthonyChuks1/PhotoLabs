@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import "./styles/PhotoDetailsModal.scss";
@@ -9,10 +9,13 @@ import useApplicationData from "./hooks/useApplicationData";
 // Note: Rendering a single component to build components in isolation
 
 const App = () => {
-  //The array that holds the id for the favorite photographs
-  const { state: {isModalOpen, modalDetail, favPhotos}, handleFavList, handleFavListFlag, handleModal } =
-    useApplicationData();
-  
+  const {
+    state: { isModalOpen, modalDetail, favPhotos },
+    handleFavList,
+    handleFavListFlag,
+    handleModal,
+  } = useApplicationData();
+
   return (
     <div className="App">
       <HomeRoute
