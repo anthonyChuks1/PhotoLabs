@@ -30,7 +30,7 @@ function reducer(state, action) {
     case ACTIONS.IS_FAV_LIST:
       return {
         ...state,
-        isFavList: state.favPhotos.length > 0,
+        isFavList: state.favPhotos.length? true : false,
       };
 
     default:
@@ -41,39 +41,44 @@ function reducer(state, action) {
 }
 
 const useApplicationData = () => {
-  // const [favPhotos, setFavPhotos] = useState([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [modalDetail, setModalDetail] = useState();
+  
   const initialState = {
     favPhotos: [],
     isModalOpen: false,
     modalDetail: null,
     isFavList: false,
   };
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { ADD_FAV_PHOTO, REMOVE_FAV_PHOTO, IS_FAV_LIST, OPEN_MODAL_DIV } =
+    ACTIONS;
 
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
   const handleFavList = (selected, photo) => {
     if (selected) {
-      dispatch({ type: "ADD_FAV_PHOTO", value: { photo } });
+      if (photo && photo.id) {
+        dispatch({ type: ADD_FAV_PHOTO, value: { photo } });
+      } else {
+        console.error("Invalid photo object: missing id property");
+      }
     } else {
-      dispatch({ type: "REMOVE_FAV_PHOTO", value: { photo } });
+      if (photo && photo.id) {
+        dispatch({ type: REMOVE_FAV_PHOTO, value: { photo } });
+      } else {
+        console.error("Invalid photo object: missing id property");
+      }
     }
   };
 
   //handles the favbadge icon on the nav bar
   const handleFavListFlag = () => {
-    return state.favPhotos.length ? true : false;
+    dispatch({ type: IS_FAV_LIST });
   };
 
   const handleModal = (photo) => {
-    dispatch({ type: "OPEN_MODAL_DIV", value: { photo } });
+    dispatch({ type: OPEN_MODAL_DIV, value: { photo } });
   };
   return {
-    state: { 
-      favPhotos: state.favPhotos, 
-      isModalOpen: state.isModalOpen, 
-      modalDetail: state.modalDetail 
-    },
+    state,
     handleFavList,
     handleFavListFlag,
     handleModal,
