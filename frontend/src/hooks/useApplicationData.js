@@ -6,6 +6,8 @@ export const ACTIONS = {
   OPEN_MODAL_DIV: "OPEN_MODAL_DIV",
   IS_FAV_LIST: "IS_FAV_LIST",
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
+  SET_SELECTED_TOPIC_ID: "SET_SELECTED_TOPIC_ID",
+  GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
 };
 
 function reducer(state, action) {
@@ -44,6 +46,18 @@ function reducer(state, action) {
         ...state,
         topicData: action.payload,
       };
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        photoData: action.payload,
+      };
+      
+    case ACTIONS.SET_SELECTED_TOPIC_ID:
+      return {
+        ...state,
+        selectedTopicId: action.payload,
+      };
+
 
     default:
       throw new Error(
@@ -59,7 +73,9 @@ const {
   IS_FAV_LIST,
   OPEN_MODAL_DIV,
   SET_PHOTO_DATA,
-  SET_TOPIC_DATA
+  SET_TOPIC_DATA,
+  GET_PHOTOS_BY_TOPICS,
+  SET_SELECTED_TOPIC_ID
 } = ACTIONS;
 
 const useApplicationData = () => {
@@ -70,21 +86,33 @@ const useApplicationData = () => {
     isFavList: false,
     photoData: [],
     topicData: [],
+    photoTopicData: [],
+    selectedTopicId: null,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { selectedTopicId } = state;
 
   useEffect(() => {
     fetch("/api/photos")
       .then((response) => response.json())
       .then((data) => dispatch({ type: SET_PHOTO_DATA, payload: data }));
   }, []);
-  
+
   useEffect(() => {
     fetch("/api/topics")
       .then((response) => response.json())
       .then((data) => dispatch({ type: SET_TOPIC_DATA, payload: data }));
   }, []);
+
+  useEffect(() => {
+    if (selectedTopicId) {
+      fetch(`/api/topics/photos/${selectedTopicId}`)
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: GET_PHOTOS_BY_TOPICS, payload: data }))
+        .catch((error) => console.error("Error fetching photos:", error));
+    }
+  }, [selectedTopicId]);
 
   const handleFavList = (selected, photo) => {
     if (photo && photo.id) {
@@ -104,12 +132,16 @@ const useApplicationData = () => {
   const handleModal = (photo) => {
     dispatch({ type: OPEN_MODAL_DIV, value: { photo } });
   };
+  const handleSelectedTopicId = (pId) => {
+    dispatch({type: SET_SELECTED_TOPIC_ID, payload: pId})
+  };
 
   return {
     state,
     handleFavList,
     handleFavListFlag,
     handleModal,
+    handleSelectedTopicId,
   };
 };
 

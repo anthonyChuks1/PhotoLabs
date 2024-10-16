@@ -10,11 +10,12 @@ const HomeRoute = ({
   handleFavList,
   isFavPhotoExist,
   handleModal,
+  handleSelectedTopicId,
 }) => {
   return (
     <div className="home-route">
       {/* Insert React */}
-      <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} />
+      <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} handleSelectedTopicId = {handleSelectedTopicId}/>
       <PhotoList
         photos={photos}
         handleFavList={handleFavList}

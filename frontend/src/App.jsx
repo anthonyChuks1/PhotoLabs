@@ -12,6 +12,7 @@ const App = () => {
     handleFavList,
     handleFavListFlag,
     handleModal,
+    handleSelectedTopicId,
   } = useApplicationData();
 
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <HomeRoute
         topics={topicData}
         photos={photoData}
+        handleSelectedTopicId={handleSelectedTopicId}
         handleFavList={handleFavList}
         isFavPhotoExist={handleFavListFlag()}
         handleModal={handleModal}
