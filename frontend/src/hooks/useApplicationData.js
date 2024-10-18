@@ -7,7 +7,9 @@ export const ACTIONS = {
   IS_FAV_LIST: "IS_FAV_LIST",
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_SELECTED_TOPIC_ID: "SET_SELECTED_TOPIC_ID",
+  SET_TOPIC_DATA: "SET_TOPIC_DATA",
   GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
+  SET_SELECTED_FAV: "SET_SELECTED_FAV",
 };
 
 function reducer(state, action) {
@@ -51,13 +53,18 @@ function reducer(state, action) {
         ...state,
         photoData: action.payload,
       };
-      
+
     case ACTIONS.SET_SELECTED_TOPIC_ID:
       return {
         ...state,
         selectedTopicId: action.payload,
       };
 
+    case ACTIONS.SET_SELECTED_FAV:
+      return {
+        ...state,
+        selected: !state.selected,
+      };
 
     default:
       throw new Error(
@@ -73,12 +80,14 @@ const {
   IS_FAV_LIST,
   OPEN_MODAL_DIV,
   SET_PHOTO_DATA,
-  SET_TOPIC_DATA,
   GET_PHOTOS_BY_TOPICS,
-  SET_SELECTED_TOPIC_ID
+  SET_SELECTED_TOPIC_ID,
+  SET_TOPIC_DATA,
+  SET_SELECTED_FAV,
 } = ACTIONS;
 
 const useApplicationData = () => {
+  //Initial state for the states
   const initialState = {
     favPhotos: [],
     isModalOpen: false,
@@ -88,23 +97,30 @@ const useApplicationData = () => {
     topicData: [],
     photoTopicData: [],
     selectedTopicId: null,
+    selected: false,
   };
 
+  //useReducer initializer
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { selectedTopicId } = state;
 
+  //Get the returned selectedTopicId state to use
+  const { selectedTopicId, selected } = state;
+
+  // fetches all photos
   useEffect(() => {
     fetch("/api/photos")
       .then((response) => response.json())
       .then((data) => dispatch({ type: SET_PHOTO_DATA, payload: data }));
   }, []);
 
+  // fetches the topics
   useEffect(() => {
     fetch("/api/topics")
       .then((response) => response.json())
       .then((data) => dispatch({ type: SET_TOPIC_DATA, payload: data }));
   }, []);
 
+  // fetches the photos by the topic id
   useEffect(() => {
     if (selectedTopicId) {
       fetch(`/api/topics/photos/${selectedTopicId}`)
@@ -114,6 +130,18 @@ const useApplicationData = () => {
     }
   }, [selectedTopicId]);
 
+  //when fav button is clicked
+  const handleFavClick = () => {
+    dispatch({ type: SET_SELECTED_FAV });
+  };
+
+  //Handles the fav icon when the the page is reloaded
+  const handleFavButtonDisplay = (photo) => {
+    const { id } = photo;
+    return state.favPhotos.filter((favId) => favId === id).length ? true : false;
+  };
+
+  // Adds the photo to the favourite list anytime the fav button is clicked
   const handleFavList = (selected, photo) => {
     if (photo && photo.id) {
       dispatch({
@@ -125,15 +153,18 @@ const useApplicationData = () => {
     }
   };
 
+  //returns a boolean depending on if there is any photo in favPhoto list
   const handleFavListFlag = () => {
     return state.favPhotos.length ? true : false;
   };
 
+  // handels the component for the content of the modal window
   const handleModal = (photo) => {
     dispatch({ type: OPEN_MODAL_DIV, value: { photo } });
   };
+  // Handles the topic selection
   const handleSelectedTopicId = (pId) => {
-    dispatch({type: SET_SELECTED_TOPIC_ID, payload: pId})
+    dispatch({ type: SET_SELECTED_TOPIC_ID, payload: pId });
   };
 
   return {
@@ -142,6 +173,8 @@ const useApplicationData = () => {
     handleFavListFlag,
     handleModal,
     handleSelectedTopicId,
+    handleFavButtonDisplay,
+    handleFavClick,
   };
 };
 

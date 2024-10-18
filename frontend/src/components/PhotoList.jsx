@@ -5,7 +5,7 @@ import PhotoListItem from "./PhotoListItem";
 
 
 
-const PhotoList = ({photos, handleFavList, handleModal}) => {
+const PhotoList = ({photos, handleFavList, handleModal, handleFavButtonDisplay, handleFavClick}) => {
   return (
     <ul className="photo-list">
       {/* Insert React */}
@@ -16,6 +16,8 @@ const PhotoList = ({photos, handleFavList, handleModal}) => {
           photo={photo}
           handleFavList={handleFavList}
           handleModal = {handleModal}
+          handleFavClick = {handleFavClick}
+          handleFavButtonDisplay = {handleFavButtonDisplay}
         ></PhotoListItem>
       ))}
     </ul>

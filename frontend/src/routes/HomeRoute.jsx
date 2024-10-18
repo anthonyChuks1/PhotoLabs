@@ -4,6 +4,7 @@ import "../styles/HomeRoute.scss";
 import TopNavigation from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 
+/**Front page of the app */
 const HomeRoute = ({
   topics,
   photos,
@@ -11,15 +12,22 @@ const HomeRoute = ({
   isFavPhotoExist,
   handleModal,
   handleSelectedTopicId,
+  handleFavClick,
+  handleFavButtonDisplay,
 }) => {
   return (
     <div className="home-route">
-      {/* Insert React */}
-      <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} handleSelectedTopicId = {handleSelectedTopicId}/>
+      <TopNavigation
+        topics={topics}
+        isFavPhotoExist={isFavPhotoExist}
+        handleSelectedTopicId={handleSelectedTopicId}
+      />
       <PhotoList
         photos={photos}
         handleFavList={handleFavList}
         handleModal={handleModal}
+        handleFavButtonDisplay={handleFavButtonDisplay}
+        handleFavClick = {handleFavClick}
       />
     </div>
   );

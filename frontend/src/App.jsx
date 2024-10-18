@@ -8,13 +8,16 @@ import useApplicationData from "./hooks/useApplicationData";
 
 const App = () => {
   const {
-    state: { isModalOpen, modalDetail, favPhotos, photoData, topicData},
+    state: { isModalOpen, modalDetail, favPhotos, photoData, topicData, selected },
     handleFavList,
     handleFavListFlag,
     handleModal,
     handleSelectedTopicId,
+    handleFavButtonDisplay,
+    handleFavClick
   } = useApplicationData();
 
+  /*All app render here*/
   return (
     <div className="App">
       <HomeRoute
@@ -24,7 +27,11 @@ const App = () => {
         handleFavList={handleFavList}
         isFavPhotoExist={handleFavListFlag()}
         handleModal={handleModal}
+        handleFavButtonDisplay = {handleFavButtonDisplay}
+        handleFavClick = {handleFavClick}
       ></HomeRoute>
+
+      {/* opens the modal when a photo is clicked */}
       {isModalOpen && (
         <PhotoDetailsModal
           handleModal={handleModal}

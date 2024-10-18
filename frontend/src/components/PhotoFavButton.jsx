@@ -5,18 +5,23 @@ import '../styles/PhotoFavButton.scss';
 
 
 
-function PhotoFavButton({photo, handleFavList}) {
-  const [selected, setSelected] = useState(false);
+function PhotoFavButton({photo, handleFavList, handleFavButtonDisplay, handleFavClick}) {
+  //const [selected, setSelected] = useState(false);
   
-  const handleClick = useCallback(() => {
-    const newSelected = !selected;
-    setSelected(newSelected);
-    handleFavList(newSelected, photo);
-  })
+  const handleClick = () => {
+    handleFavClick();
+   // const newSelected = !selected;
+    // changed the selected state
+    //setSelected(newSelected);
+    // add to list 
+    handleFavList(handleFavButtonDisplay(photo), photo);
+  }
+
+  
   return (
-    <div className="photo-list__fav-icon" onClick = {handleClick}>
+    <div className="photo-list__fav-icon" onClick={handleClick}>
       <div className="photo-list__fav-icon-svg" >
-       <FavIcon selected = {selected } />    
+       <FavIcon selected = {() => handleFavButtonDisplay(photo)} />    
       </div>
     </div>
   );
