@@ -22,3 +22,10 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+
+
+### SCREENSHOTS
+![The animals section homepage](./frontend/docs/animalpage.png)
+![Demonstrating the likes functionality](./frontend/docs/likes.png)
+![The modal page when the photo is clicked](./frontend/docs/modalpage.png)
+![All related photos of a user](./frontend/docs/relatedphotos.png)
