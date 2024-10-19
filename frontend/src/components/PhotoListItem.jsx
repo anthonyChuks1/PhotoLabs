@@ -7,7 +7,8 @@ const PhotoListItem = ({
   handleFavList,
   handleModal,
   handleFavClick,
-  handleFavButtonDisplay,
+  isFavourite,
+  
 }) => {
   /* Insert React */
   const {
@@ -26,7 +27,7 @@ const PhotoListItem = ({
         photo={photo}
         handleFavList={handleFavList}
         handleFavClick={handleFavClick}
-        handleFavButtonDisplay={handleFavButtonDisplay}
+        isFavourite={isFavourite}
       />
       <img
         src={regular}

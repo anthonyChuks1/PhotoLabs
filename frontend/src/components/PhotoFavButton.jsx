@@ -1,27 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React from "react";
 
-import FavIcon from './FavIcon';
-import '../styles/PhotoFavButton.scss';
+import FavIcon from "./FavIcon";
+import "../styles/PhotoFavButton.scss";
 
-
-
-function PhotoFavButton({photo, handleFavList, handleFavButtonDisplay, handleFavClick}) {
-  //const [selected, setSelected] = useState(false);
-  
+function PhotoFavButton({ photo, isFavourite, handleFavClick }) {
   const handleClick = () => {
-    handleFavClick();
-   // const newSelected = !selected;
-    // changed the selected state
-    //setSelected(newSelected);
-    // add to list 
-    handleFavList(handleFavButtonDisplay(photo), photo);
-  }
-
-  
+    handleFavClick(photo);
+  };
+  const newSelected = isFavourite(photo);
+  // console.log("In photo fav button :",newSelected);
   return (
     <div className="photo-list__fav-icon" onClick={handleClick}>
-      <div className="photo-list__fav-icon-svg" >
-       <FavIcon selected = {() => handleFavButtonDisplay(photo)} />    
+      <div className="photo-list__fav-icon-svg">
+        <FavIcon selected={newSelected} />
       </div>
     </div>
   );

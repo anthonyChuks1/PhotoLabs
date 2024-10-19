@@ -10,6 +10,8 @@ const PhotoDetailsModal = ({
   photo,
   favPhotos,
   handleFavList,
+  isFavourite,
+  handleFavClick,
 }) => {
   const {
     urls: { full, regular } = {},
@@ -39,7 +41,8 @@ const PhotoDetailsModal = ({
           photo={photo}
           favPhotos={favPhotos}
           handleFavList={handleFavList}
-          
+          isFavourite={isFavourite} 
+          handleFavClick={handleFavClick}  
         />
         <img src={full} className="photo-details-modal__image"alt="Selected photo" />
       </div>
@@ -69,7 +72,9 @@ const PhotoDetailsModal = ({
           <PhotoList
             photos={similar_photos_array}
             favourites={favPhotos}
-            handleFavList={handleFavList}
+            handleFavClick={handleFavClick}
+            isFavourite={isFavourite}
+            handleModal={handleModal}
           />
         </div>
       </div>

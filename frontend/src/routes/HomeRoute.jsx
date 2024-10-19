@@ -13,7 +13,8 @@ const HomeRoute = ({
   handleModal,
   handleSelectedTopicId,
   handleFavClick,
-  handleFavButtonDisplay,
+  isFavourite,
+  
 }) => {
   return (
     <div className="home-route">
@@ -26,8 +27,9 @@ const HomeRoute = ({
         photos={photos}
         handleFavList={handleFavList}
         handleModal={handleModal}
-        handleFavButtonDisplay={handleFavButtonDisplay}
+        isFavourite= {isFavourite}
         handleFavClick = {handleFavClick}
+        
       />
     </div>
   );

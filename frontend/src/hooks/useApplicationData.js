@@ -130,27 +130,39 @@ const useApplicationData = () => {
     }
   }, [selectedTopicId]);
 
+  useEffect(() => {
+    console.log("Selected state updated:", selected);
+  }, [selected]);
+
+  useEffect(() => {
+    console.log("Fav Photos:", state.favPhotos);
+  }, [state.favPhotos]);
+
+  // Adds the photo to the favourite list anytime the fav button is clicked
+  const handleFavList = (photo, isSelected) => {
+    // if (photo && photo.id) {
+      dispatch({
+        type: isSelected ? ADD_FAV_PHOTO : REMOVE_FAV_PHOTO,
+        value: { photo },
+      });
+   // } else {
+    //   console.error("Invalid photo object: missing id property");
+    // }
+  };
+
   //when fav button is clicked
-  const handleFavClick = () => {
-    dispatch({ type: SET_SELECTED_FAV });
+  const handleFavClick = (photo) => {
+    // dispatch({ type: SET_SELECTED_FAV });
+
+    handleFavList(photo, !state.favPhotos.includes(photo.id)); // Pass the opposite of current selected state
+    // if (state.favPhotos.includes(photo.id)) {
+    //   dispatch({ type: SET_SELECTED_FAV });
+    // }
   };
 
   //Handles the fav icon when the the page is reloaded
-  const handleFavButtonDisplay = (photo) => {
-    const { id } = photo;
-    return state.favPhotos.filter((favId) => favId === id).length ? true : false;
-  };
-
-  // Adds the photo to the favourite list anytime the fav button is clicked
-  const handleFavList = (selected, photo) => {
-    if (photo && photo.id) {
-      dispatch({
-        type: selected ? ADD_FAV_PHOTO : REMOVE_FAV_PHOTO,
-        value: { photo },
-      });
-    } else {
-      console.error("Invalid photo object: missing id property");
-    }
+  const isFavourite = (photo) => {
+    return state.favPhotos.includes(photo.id);
   };
 
   //returns a boolean depending on if there is any photo in favPhoto list
@@ -173,7 +185,7 @@ const useApplicationData = () => {
     handleFavListFlag,
     handleModal,
     handleSelectedTopicId,
-    handleFavButtonDisplay,
+    isFavourite,
     handleFavClick,
   };
 };

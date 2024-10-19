@@ -2,18 +2,18 @@ import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import "./styles/PhotoDetailsModal.scss";
-import PhotoDetailsModal from "routes/PhotoDetailsModal";
+import PhotoDetailsModal from "./routes/PhotoDetailsModal";
 import useApplicationData from "./hooks/useApplicationData";
 // Note: Rendering a single component to build components in isolation
 
 const App = () => {
   const {
-    state: { isModalOpen, modalDetail, favPhotos, photoData, topicData, selected },
+    state: { isModalOpen, modalDetail, favPhotos, photoData, topicData},
     handleFavList,
     handleFavListFlag,
     handleModal,
     handleSelectedTopicId,
-    handleFavButtonDisplay,
+    isFavourite,
     handleFavClick
   } = useApplicationData();
 
@@ -27,7 +27,7 @@ const App = () => {
         handleFavList={handleFavList}
         isFavPhotoExist={handleFavListFlag()}
         handleModal={handleModal}
-        handleFavButtonDisplay = {handleFavButtonDisplay}
+        isFavourite={isFavourite}
         handleFavClick = {handleFavClick}
       ></HomeRoute>
 
@@ -38,6 +38,8 @@ const App = () => {
           photo={modalDetail}
           favPhotos={favPhotos}
           handleFavList={handleFavList}
+          isFavourite={isFavourite}
+          handleFavClick={handleFavClick}
         />
       )}
     </div>
