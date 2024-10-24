@@ -36,6 +36,7 @@ module.exports = function application(
   app.use(bodyparser.json());
   app.use(express.static(path.join(__dirname, 'public')));
 
+
   app.use("/api", photos(db));
   app.use("/api", topics(db));
 

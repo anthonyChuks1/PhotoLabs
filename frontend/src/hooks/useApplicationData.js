@@ -10,6 +10,7 @@ export const ACTIONS = {
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
   SET_SELECTED_FAV: "SET_SELECTED_FAV",
+  OPEN_ADD_PHOTO: "OPEN_ADD_PHOTO",
 };
 
 function reducer(state, action) {
@@ -32,6 +33,12 @@ function reducer(state, action) {
         isModalOpen: !state.isModalOpen,
         modalDetail: action.value.photo,
       };
+
+      case ACTIONS.OPEN_ADD_PHOTO:
+        return{
+          ...state,
+          isAddPhoto: !state.isAddPhoto,
+        }
     case ACTIONS.IS_FAV_LIST:
       return {
         ...state,
@@ -84,6 +91,7 @@ const {
   SET_SELECTED_TOPIC_ID,
   SET_TOPIC_DATA,
   SET_SELECTED_FAV,
+  OPEN_ADD_PHOTO,
 } = ACTIONS;
 
 const useApplicationData = () => {
@@ -98,6 +106,7 @@ const useApplicationData = () => {
     photoTopicData: [],
     selectedTopicId: null,
     selected: false,
+    isAddPhoto: false,
   };
 
   //useReducer initializer
@@ -137,6 +146,10 @@ const useApplicationData = () => {
   useEffect(() => {
     console.log("Fav Photos:", state.favPhotos);
   }, [state.favPhotos]);
+  
+  useEffect(()=> {
+    console.log("Is add new photo:", state.isAddPhoto);
+  }, [state.isAddPhoto]);
 
   // Adds the photo to the favourite list anytime the fav button is clicked
   const handleFavList = (photo, isSelected) => {
@@ -179,6 +192,11 @@ const useApplicationData = () => {
     dispatch({ type: SET_SELECTED_TOPIC_ID, payload: pId });
   };
 
+  const handleAddNewPhotoClick = () => {
+    dispatch({type: OPEN_ADD_PHOTO})
+    console.log("You can now add a photo");
+  }
+
   return {
     state,
     handleFavList,
@@ -187,6 +205,7 @@ const useApplicationData = () => {
     handleSelectedTopicId,
     isFavourite,
     handleFavClick,
+    handleAddNewPhotoClick,
   };
 };
 

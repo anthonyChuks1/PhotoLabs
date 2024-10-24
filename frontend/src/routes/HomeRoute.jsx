@@ -14,6 +14,7 @@ const HomeRoute = ({
   handleSelectedTopicId,
   handleFavClick,
   isFavourite,
+  handleAddNewPhotoClick,
   
 }) => {
   return (
@@ -22,6 +23,7 @@ const HomeRoute = ({
         topics={topics}
         isFavPhotoExist={isFavPhotoExist}
         handleSelectedTopicId={handleSelectedTopicId}
+        handleAddNewPhotoClick={handleAddNewPhotoClick}
       />
       <PhotoList
         photos={photos}

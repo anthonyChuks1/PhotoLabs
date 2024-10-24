@@ -18,7 +18,6 @@ const PhotoList = ({photos, handleFavList, handleModal, isFavourite, handleFavCl
           handleModal = {handleModal}
           handleFavClick = {handleFavClick}
           isFavourite={isFavourite}
-          
         ></PhotoListItem>
       ))}
     </ul>
